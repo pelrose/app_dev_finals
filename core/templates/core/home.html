@@ -1,0 +1,131 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4" data-aos="fade-up">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-chart-line me-2"></i>Model Performance
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ model_accuracy }}%</div>
+                            <div class="stat-label">Model Accuracy</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="visualization-container">
+                            <div class="visualization-title">Confusion Matrix</div>
+                            <img src="data:image/png;base64,{{ cm_graph }}" class="img-fluid" alt="Confusion Matrix">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-database me-2"></i>Dataset Statistics
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.total_passengers }}</div>
+                            <div class="stat-label">Total Passengers</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.transported_rate }}%</div>
+                            <div class="stat-label">Transported Rate</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.avg_age }}</div>
+                            <div class="stat-label">Average Age</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">${{ stats.avg_roomservice }}</div>
+                            <div class="stat-label">Avg Room Service</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-percentage me-2"></i>Transport Rates by Home Planet
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.earth_rate }}%</div>
+                            <div class="stat-label">Earth Transport Rate</div>
+                            <small class="text-muted">Percentage of Earth passengers transported</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.mars_rate }}%</div>
+                            <div class="stat-label">Mars Transport Rate</div>
+                            <small class="text-muted">Percentage of Mars passengers transported</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ stats.europa_rate }}%</div>
+                            <div class="stat-label">Europa Transport Rate</div>
+                            <small class="text-muted">Percentage of Europa passengers transported</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-chart-bar me-2"></i>Data Visualizations
+            </div>
+            <div class="card-body">
+                <div class="visualization-container">
+                    <img src="data:image/png;base64,{{ graph }}" class="img-fluid" alt="Data Visualizations">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if user.is_authenticated %}
+<div class="row mt-4">
+    <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="400">
+        <a href="{% url 'predict' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-chart-line me-2"></i>Make a Prediction
+        </a>
+    </div>
+</div>
+{% else %}
+<div class="row mt-4">
+    <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="400">
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            Please <a href="{% url 'login' %}" class="alert-link">login</a> or 
+            <a href="{% url 'register' %}" class="alert-link">register</a> to make predictions.
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %} 

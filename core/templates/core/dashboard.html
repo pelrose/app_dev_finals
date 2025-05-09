@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Dashboard</h2>
+        
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Model Performance</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Accuracy: {{ model_accuracy }}%</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="data:image/png;base64,{{ cm_graph }}" class="img-fluid" alt="Confusion Matrix">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Dataset Statistics</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Total Passengers: {{ stats.total_passengers }}</li>
+                            <li class="list-group-item">Overall Survival Rate: {{ stats.survival_rate }}%</li>
+                            <li class="list-group-item">Average Age: {{ stats.avg_age }} years</li>
+                            <li class="list-group-item">Average Fare: ${{ stats.avg_fare }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Survival Rates by Category</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Male Survival Rate: {{ stats.male_survival }}%</li>
+                            <li class="list-group-item">Female Survival Rate: {{ stats.female_survival }}%</li>
+                            <li class="list-group-item">First Class Survival Rate: {{ stats.first_class_survival }}%</li>
+                            <li class="list-group-item">Second Class Survival Rate: {{ stats.second_class_survival }}%</li>
+                            <li class="list-group-item">Third Class Survival Rate: {{ stats.third_class_survival }}%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Visualizations</h5>
+                        <img src="data:image/png;base64,{{ graph }}" class="img-fluid" alt="Data Visualizations">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html> 

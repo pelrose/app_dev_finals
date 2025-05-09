@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8" data-aos="fade-up">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-chart-line me-2"></i>Make a Prediction
+            </div>
+            <div class="card-body">
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>{{ error }}
+                </div>
+                {% endif %}
+
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.HomePlanet.id_for_label }}" class="form-label">Home Planet</label>
+                            {{ form.HomePlanet }}
+                            {% if form.HomePlanet.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.HomePlanet.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.CryoSleep.id_for_label }}" class="form-label">Cryo Sleep</label>
+                            {{ form.CryoSleep }}
+                            {% if form.CryoSleep.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.CryoSleep.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.Destination.id_for_label }}" class="form-label">Destination</label>
+                            {{ form.Destination }}
+                            {% if form.Destination.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.Destination.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.Age.id_for_label }}" class="form-label">Age</label>
+                            {{ form.Age }}
+                            {% if form.Age.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.Age.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.VIP.id_for_label }}" class="form-label">VIP Status</label>
+                            {{ form.VIP }}
+                            {% if form.VIP.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.VIP.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.RoomService.id_for_label }}" class="form-label">Room Service</label>
+                            {{ form.RoomService }}
+                            {% if form.RoomService.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.RoomService.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.FoodCourt.id_for_label }}" class="form-label">Food Court</label>
+                            {{ form.FoodCourt }}
+                            {% if form.FoodCourt.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.FoodCourt.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.ShoppingMall.id_for_label }}" class="form-label">Shopping Mall</label>
+                            {{ form.ShoppingMall }}
+                            {% if form.ShoppingMall.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.ShoppingMall.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.Spa.id_for_label }}" class="form-label">Spa</label>
+                            {{ form.Spa }}
+                            {% if form.Spa.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.Spa.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.VRDeck.id_for_label }}" class="form-label">VR Deck</label>
+                            {{ form.VRDeck }}
+                            {% if form.VRDeck.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.VRDeck.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calculator me-2"></i>Predict Transport
+                        </button>
+                    </div>
+                </form>
+
+                {% if show_result %}
+                <div class="mt-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card {% if prediction %}bg-success text-white{% else %}bg-danger text-white{% endif %}">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">
+                                {% if prediction %}
+                                <i class="fas fa-check-circle me-2"></i>Transported
+                                {% else %}
+                                <i class="fas fa-times-circle me-2"></i>Not Transported
+                                {% endif %}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const formFields = document.querySelectorAll('input, select');
+        formFields.forEach(field => {
+            field.classList.add('form-control');
+        });
+    });
+</script>
+{% endblock %} 
